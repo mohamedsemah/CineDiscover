@@ -1,34 +1,57 @@
 .attribute-button {
   padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 25px;
   font-weight: 600;
   border: none;
   cursor: pointer;
-  transition: all 0.2s;
-  font-size: 1rem;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.attribute-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.attribute-button:hover::before {
+  left: 100%;
 }
 
 .attribute-button.normal {
-  background: #d97706;
-  color: black;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
 }
 
 .attribute-button.normal:hover {
-  background: #f59e0b;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(240, 147, 251, 0.6);
 }
 
 .attribute-button.banned {
-  background: #dc2626;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
   color: white;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
 }
 
 .attribute-button.banned:hover {
-  background: #ef4444;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
 }
 
 @media (max-width: 768px) {
   .attribute-button {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
   }
 }
