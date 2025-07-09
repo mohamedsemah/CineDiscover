@@ -37,7 +37,7 @@ function App() {
     <div className="app">
       <div className="app-background" />
 
-      <div className="app-content">
+      <div className={`app-content ${banList.length === 0 ? 'full-width' : ''}`}>
         <div className="main-section">
           <Header />
 
@@ -54,6 +54,7 @@ function App() {
         <BanList
           banList={banList}
           onToggleBan={toggleBanList}
+          isVisible={banList.length > 0}
         />
       </div>
     </div>

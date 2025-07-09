@@ -1,6 +1,10 @@
 import './BanList.css'
 
-function BanList({ banList, onToggleBan }) {
+function BanList({ banList, onToggleBan, isVisible }) {
+  if (!isVisible) {
+    return null
+  }
+
   return (
     <div className="ban-list">
       <h3 className="ban-list-title">Ban List</h3>
