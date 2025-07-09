@@ -1,34 +1,62 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Header from './components/Header'
+import MovieDisplay from './components/MovieDisplay'
+import BanList from './components/BanList'
+import { fetchRandomMovie } from './services/movieService'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [currentMovie, setCurrentMovie] = useState(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [banList, setBanList] = useState([])
+
+  const handleDiscoverMovie = async () => {
+    setLoading(true)
+    setError(null)
+
+    try {
+      const movie = await fetchRandomMovie(banList)
+      setCurrentMovie(movie)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const toggleBanList = (attribute) => {
+    if (banList.includes(attribute)) {
+      setBanList(banList.filter(item => item !== attribute))
+    } else {
+      setBanList([...banList, attribute])
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="app">
+      <div className="app-background" />
+
+      <div className="app-content">
+        <div className="main-section">
+          <Header />
+
+          <MovieDisplay
+            movie={currentMovie}
+            banList={banList}
+            onToggleBan={toggleBanList}
+            loading={loading}
+            error={error}
+            onDiscover={handleDiscoverMovie}
+          />
+        </div>
+
+        <BanList
+          banList={banList}
+          onToggleBan={toggleBanList}
+        />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 

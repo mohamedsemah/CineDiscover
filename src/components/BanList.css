@@ -1,0 +1,63 @@
+.ban-list {
+  width: 320px;
+  min-width: 320px;
+  background: #1f2937;
+  padding: 1.5rem;
+  height: 100vh;
+  overflow-y: auto;
+  flex-shrink: 0; /* Prevent shrinking */
+}
+
+.ban-list-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.ban-list-description {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.ban-list-empty {
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+.ban-list-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ban-list-item {
+  width: 100%;
+  background: #dc2626;
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 0.875rem;
+}
+
+.ban-list-item:hover {
+  background: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .ban-list {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+  }
+
+  .ban-list-title {
+    font-size: 1.5rem;
+  }
+}
